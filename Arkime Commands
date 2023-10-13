@@ -1,4 +1,5 @@
 Arkime:
+
 basic operators: excluding an operator treats it as an AND
 || or
 ! not
@@ -84,5 +85,80 @@ http.xff exists - If X-Forwarded-For header exists, can indicate proxy use.
 ___________________________________________________________________________________________________________________________________________________________________________________________
 CyberChef:
 
+From Base64: Decodes Base64-encoded strings.
+To Base64: Encodes strings to Base64.
+From Hex: Decodes hexadecimal data.
+To Hex: Encodes data to hexadecimal.
+
+To String: Converts various data types to a string.
+From Charcode: Converts character codes to a string.
+To Charcode: Converts characters in a string to their corresponding character codes.
+Timestamp to Date: Converts Unix timestamps to readable dates.
+
+AES Decrypt/Encrypt: For data encrypted with AES.
+ROT13: A simple substitution cipher.
+XOR: XOR operation, which can be useful if data is XOR-obfuscated.
+
+Gunzip: Decompresses Gzip-compressed data.
+Gzip: Compresses data using the Gzip format.
+Inflate/Deflate: For Zlib compression and decompression.
+
+Regular expression: Helps to extract, replace, or modify specific patterns in the data.
+
+Extract URLs: Extracts URLs from data.
+Extract IP addresses: Pulls out IP addresses.
+Entropy: Measures the randomness of data, which can help identify encryption or compression.
+
+Parse IP range: Converts IP ranges into individual IPs.
+CIDR Subnet Calculator: Provides information on CIDR notations.
+
+ASCII to Binary: Converts ASCII data to its binary representation.
+Binary to ASCII: Converts binary data back to ASCII.
+
+Operations like MD5, SHA-1, SHA-256: Useful if you're dealing with hashed values and might want to recognize the type of hash or compare against known values.
+
+JSON Beautify: Makes raw JSON logs more readable.
+XML Beautify: Formats XML data for readability.
+Data Visualization:
+Byte Histogram: Provides a visual representation of byte values in your data.
 ___________________________________________________________________________________________________________________________________________________________________________________________
 Just in case, windows event id's:
+
+4624: Successful logon.
+4625: Logon failure (can be indicative of brute-force attempts when seen in volume).
+4634: Account was logged off.
+
+4740: A user account was locked out.
+
+4768: Kerberos authentication ticket was requested.
+4769: Kerberos service ticket was requested.
+4770: Kerberos service ticket was renewed.
+4771: Kerberos pre-authentication failed (could be indicative of a brute-force or Kerberoasting).
+
+4648: A logon was attempted using explicit credentials.
+
+4672: Special privileges assigned to new logon (often seen with "Pass-the-Hash" (PtH) as the attacker gains elevated privileges).
+4674: An operation was attempted on a privileged object.
+
+4732: A member was added to a security-enabled local group (could indicate lateral movement or privilege escalation).
+4728: A member was added to a security-enabled global group.
+
+4720: A user account was created (could be an indicator of attacker persistence).
+
+# Brute-force/Password Spray:
+event.id: "4625" AND source.ip: "[suspicious_IP_here]"
+
+# Kerberoasting:
+event.id: "4771"
+
+# User Account Lockouts:
+event.id: "4740"
+
+# Logon with Explicit Credentials (potential PtH):
+event.id: "4648"
+
+# Privilege Use:
+event.id: "4672" OR event.id: "4674"
+
+# Account Creation (potential attacker persistence):
+event.id: "4720"
