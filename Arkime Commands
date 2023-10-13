@@ -55,36 +55,31 @@ http.statuscode == 404
 501 Not Implemented
 
 dns.host == "suspicious.com"
+dns.host in ".xyz" || dns.host in ".top"
 dns.query == "example.com"
 dns.query in "payload" || dns.query in "exploit" || dns.query in "password" || dns.query in "login"
 
 tls.servername == "example.com"
 tls.version == "SSLv3"
 
-email.from == "suspicious@example.com" - Filter emails from a specific sender.
-email.subject contains "alert" - Search for specific keywords in email subjects.
+email.from == "suspicious@example.com"
+email.subject contains "alert"
 
-Database
 db.query contains "DROP" - Find potential SQL injection attempts.
 Scanning and Recon:
 
 packets > 10000 - High packet counts might indicate a scan or DDoS.
 ip.dst == 192.168.1.1 and port.dst > 60000 - Attempts to connect to high-range ports on a target.
-Potential DDoS Indicators:
 
 protocol == "icmp" - High counts of ICMP might indicate a ping flood.
 bytes > 1000000 - Sessions with a large amount of data.
-File Transfer & Payloads:
 
 exists:file - Check if there were file transfers in sessions.
 file.name == "suspicious.exe" - Search for specific filenames.
 file.mime == "application/x-dosexec" - Look for executable file transfers.
-Potential Command and Control (C2):
 
 http.uri contains "/c2/" - Many C2s use specific URIs; you can search for suspicious patterns.
 dns.host regexp "^[a-z]{15,}.com$" - Look for algorithmically generated domain names (DGA).
-Tor & Proxy Traffic:
-ip.dst in [list of known TOR nodes] - To detect if someone is using TOR.
 http.xff exists - If X-Forwarded-For header exists, can indicate proxy use.
 ___________________________________________________________________________________________________________________________________________________________________________________________
 CyberChef:
